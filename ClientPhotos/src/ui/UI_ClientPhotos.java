@@ -32,27 +32,37 @@ public class UI_ClientPhotos extends javax.swing.JFrame {
         paneGlobal = new javax.swing.JTabbedPane();
         panePersonnes = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        personsList = new javax.swing.JList();
         labelLName = new javax.swing.JLabel();
         labelName = new javax.swing.JLabel();
         tfLName = new javax.swing.JTextField();
         tfName = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        addButton = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
+        updateButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        pictureDisplay = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listPhotos = new javax.swing.JList();
+        labelPhotoName = new javax.swing.JLabel();
+        labelPhotoName1 = new javax.swing.JLabel();
+        tfPhotoName = new javax.swing.JTextField();
+        tfPhotoOwner = new javax.swing.JTextField();
+        picAddButton = new javax.swing.JButton();
+        picDeleteButton = new javax.swing.JButton();
+        picEditButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         title.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         title.setText("TP J2EE - PHOTOS");
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
+        personsList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(personsList);
 
         labelLName.setText("Nom : ");
 
@@ -70,11 +80,19 @@ public class UI_ClientPhotos extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("jButton1");
+        addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/adduser.png"))); // NOI18N
+        addButton.setText("Ajouter");
 
-        jButton2.setText("jButton1");
+        deleteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/deluser.png"))); // NOI18N
+        deleteButton.setText("Supprimer");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("jButton1");
+        updateButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/edituser.png"))); // NOI18N
+        updateButton.setText("Modifier");
 
         javax.swing.GroupLayout panePersonnesLayout = new javax.swing.GroupLayout(panePersonnes);
         panePersonnes.setLayout(panePersonnesLayout);
@@ -83,17 +101,16 @@ public class UI_ClientPhotos extends javax.swing.JFrame {
             .addGroup(panePersonnesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panePersonnesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
-                    .addGroup(panePersonnesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)))
+                    .addComponent(updateButton, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                    .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE))
                 .addGap(97, 97, 97)
-                .addGroup(panePersonnesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panePersonnesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panePersonnesLayout.createSequentialGroup()
                         .addComponent(labelLName)
                         .addGap(32, 32, 32)
-                        .addComponent(tfLName, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tfLName))
                     .addGroup(panePersonnesLayout.createSequentialGroup()
                         .addComponent(labelName)
                         .addGap(18, 18, 18)
@@ -106,34 +123,115 @@ public class UI_ClientPhotos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panePersonnesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panePersonnesLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                        .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40))
+                    .addGroup(panePersonnesLayout.createSequentialGroup()
                         .addGroup(panePersonnesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(labelLName)
                             .addComponent(tfLName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(panePersonnesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(labelName)
-                            .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
+                            .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         paneGlobal.addTab("Personnes", panePersonnes);
+
+        javax.swing.GroupLayout pictureDisplayLayout = new javax.swing.GroupLayout(pictureDisplay);
+        pictureDisplay.setLayout(pictureDisplayLayout);
+        pictureDisplayLayout.setHorizontalGroup(
+            pictureDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 378, Short.MAX_VALUE)
+        );
+        pictureDisplayLayout.setVerticalGroup(
+            pictureDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 293, Short.MAX_VALUE)
+        );
+
+        listPhotos.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(listPhotos);
+
+        labelPhotoName.setText("Nom de la photo : ");
+
+        labelPhotoName1.setText("Propriétaire de la photo : ");
+
+        tfPhotoOwner.setText("jTextField2");
+        tfPhotoOwner.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfPhotoOwnerActionPerformed(evt);
+            }
+        });
+
+        picAddButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/addpic.png"))); // NOI18N
+        picAddButton.setText("Ajouter");
+
+        picDeleteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/delpic.png"))); // NOI18N
+        picDeleteButton.setText("Ajouter");
+
+        picEditButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/editpic.png"))); // NOI18N
+        picEditButton.setText("Modifier");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 939, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(picEditButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                    .addComponent(picAddButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(picDeleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelPhotoName1)
+                            .addComponent(labelPhotoName))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfPhotoName)
+                            .addComponent(tfPhotoOwner, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(pictureDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 421, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelPhotoName)
+                            .addComponent(tfPhotoName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelPhotoName1)
+                            .addComponent(tfPhotoOwner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(picAddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
+                .addComponent(picEditButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(picDeleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(69, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(pictureDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         paneGlobal.addTab("Photos", jPanel2);
@@ -171,6 +269,14 @@ public class UI_ClientPhotos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfNameActionPerformed
 
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void tfPhotoOwnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPhotoOwnerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfPhotoOwnerActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -207,18 +313,28 @@ public class UI_ClientPhotos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JList jList1;
+    private javax.swing.JButton addButton;
+    private javax.swing.JButton deleteButton;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelLName;
     private javax.swing.JLabel labelName;
+    private javax.swing.JLabel labelPhotoName;
+    private javax.swing.JLabel labelPhotoName1;
+    private javax.swing.JList listPhotos;
     private javax.swing.JTabbedPane paneGlobal;
     private javax.swing.JPanel panePersonnes;
+    private javax.swing.JList personsList;
+    private javax.swing.JButton picAddButton;
+    private javax.swing.JButton picDeleteButton;
+    private javax.swing.JButton picEditButton;
+    private javax.swing.JPanel pictureDisplay;
     private javax.swing.JTextField tfLName;
     private javax.swing.JTextField tfName;
+    private javax.swing.JTextField tfPhotoName;
+    private javax.swing.JTextField tfPhotoOwner;
     private javax.swing.JLabel title;
+    private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
 }

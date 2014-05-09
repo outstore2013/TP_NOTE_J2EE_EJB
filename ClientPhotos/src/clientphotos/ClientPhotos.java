@@ -6,6 +6,10 @@
 
 package clientphotos;
 
+import ui.UI_ClientPhotos;
+
+
+
 /**
  *
  * @author Louis
@@ -16,7 +20,9 @@ public class ClientPhotos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        UI_ClientPhotos client = new UI_ClientPhotos();
+        client.setVisible(true);
     }
     
 }
