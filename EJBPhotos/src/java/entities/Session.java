@@ -6,58 +6,51 @@
 
 package entities;
 
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 /**
  *
  * @author Louis
  */
 @Stateless
-public class Session implements SessionRemote {
+public  class Session implements SessionRemote {
     @PersistenceContext
     private EntityManager em;
-    @PersistenceContext(name="TP_Photo")
+    @PersistenceContext(name="EJBPhotosPU")
 
-    public void createPhoto(Photo p, Personne pe) {
-        em.persist(p);
+    @Override
+    public void createPhoto(Personne pe, Photo p) {
         em.persist(pe);
+        em.persist(p);
     }
 
+    @Override
     public void deletePhoto(Photo p) {
         em.remove(p);
     }
 
+    @Override
     public void updatePhoto(Photo p) {
         em.merge(p);
     }
 
-    public List<Photo> getPhotos() {
-        Query q = em.createNamedQuery("Photo.findAll");
-        List<Photo> lesPhotos = q.getResultList();
-        return lesPhotos;
-    }
-
+    @Override
     public void createPersonne(Personne pe) {
         em.persist(pe);
     }
 
+    @Override
     public void deletePersonne(Personne pe) {
-        em.refresh(pe);
+        em.merge(pe);
     }
 
+    @Override
     public void updatePersonne(Personne pe) {
         em.remove(pe);
     }
-
-    public List<Personne> getPersonnes(){
-        Query q = em.createNamedQuery("Personne.findAll");
-        List<Personne> lesPersonnes = q.getResultList();
-        return lesPersonnes;
-    };
+    
     
     
 }

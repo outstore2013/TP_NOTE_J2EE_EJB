@@ -215,3 +215,4 @@ pip-log.txt
 .mr.developer.cfg
 /EJBPhotos/nbproject/private/
 /ClientPhotos/nbproject/private/
+/ClientApp/nbproject/private/

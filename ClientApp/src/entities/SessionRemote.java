@@ -6,7 +6,6 @@
 
 package entities;
 
-import java.util.List;
 import javax.ejb.Remote;
 
 /**
@@ -16,20 +15,16 @@ import javax.ejb.Remote;
 @Remote
 public interface SessionRemote {
 
-    void createPhoto(entities.Photo p, entities.Personne pe);
+    void createPhoto(entities.Personne pe, entities.Photo p);
 
     void deletePhoto(entities.Photo p);
 
     void updatePhoto(entities.Photo p);
-    
-    List<Photo> getPhotos();
 
     void createPersonne(entities.Personne pe);
 
     void deletePersonne(entities.Personne pe);
 
     void updatePersonne(entities.Personne pe);
-
-    List<Personne> getPersonnes();
     
 }

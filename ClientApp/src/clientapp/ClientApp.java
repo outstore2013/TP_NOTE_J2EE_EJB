@@ -4,25 +4,28 @@
  * and open the template in the editor.
  */
 
-package clientphotos;
+package clientapp;
 
-import ui.UI_ClientPhotos;
-
-
+import controllers.Controller;
+import entities.Personne;
 
 /**
  *
  * @author Louis
  */
-public class ClientPhotos {
+public class ClientApp {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        Personne pe = new Personne();
+        pe.setNom("Hunger");
+        pe.setPrenom("Gégé");
+        Controller ct = new Controller();
+        //ct.createPersonne(pe);
+        ct.deletePersonne(pe);
         
-        UI_ClientPhotos client = new UI_ClientPhotos();
-        client.setVisible(true);
     }
     
 }
